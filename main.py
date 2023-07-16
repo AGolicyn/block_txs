@@ -13,11 +13,12 @@ def get_block_txs(height: int):
 
     # получаем список транзакций для блока
     transactions = data["block"]["data"]["txs"]
-    # по документации Akash, данные сериализованы с помощью Amino
+
+    # по документации Akash, данные транзакций сериализованы с помощью Amino
     # "... serialize it to the Amino wire protocol, and output it as base64 ..."
     # для десериализации и получения читаемых данных нужна схема .proto
     # нашёл что-то похожее тут: https://github.com/cosmos/cosmos-sdk/blob/main/proto/cosmos/tx/v1beta1/tx.proto
-    # но довести дело до ума не получилось. Если можно было сделать проще, дайте обратную связь пожалуйста.
+    # но довести дело до ума не получилось. Если можно было сделать проще, дайте пожалуйста обратную связь.
     decoded_txs = [base64.b64decode(transaction) for transaction in transactions]
     print(decoded_txs)
     return decoded_txs
